@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>【车型对比】</title>
+    <!--        <link type="text/css" href="/static/base_15v1_e7b5bdb.css" rel="stylesheet">-->
+    <link type="text/css" href="{% static 'compare/base_15v1_e7b5bdb.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'compare/compare_trim_033fef4.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'compare/compareDB_f392b76.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'compare/style.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'compare/jquery-1.8.3.min.js' %}"></script>
+    <style>
+        input {
+            outline-style: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 13px 14px;
+            width: 400px;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: "Microsoft soft";
+        }
+
+        input:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+        }
+
+        button {
+            width: 80px;
+            padding: 12px;
+            background-color: #428bca;
+            border-color: #357ebd;
+            color: #fff;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px; /* future proofing */
+            -khtml-border-radius: 10px; /* for old Konqueror browsers */
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            font-weight: 900;
+            font-size: 125%
+        }
+    </style>
+    <script>
+        function pkclick(self) {
+            var info1 = $("#info1").val();
+            var info2 = $("#info2").val();
+            console.log(info1);
+            console.log(info2)
+            if (info1 == '' || info2 == '') {
+                alert('请输入房源信息！')
+            } else {
+                window.location.href = "/compare/" + "?search1=" + info1 + "&search2=" + info2
+            }
+        }
+    </script>
+</head>
+<body>
+<script type="text/javascript" src="{% static 'compare/jquery-1.8.3.min.js' %}"></script>
+<div class="banner">
+    <ul class="menu area">
+        {#        <li><a href="http://db.auto.sohu.com/pk/model/2374_4207/compare">车型对比</a></li>#}
+        {#        <li class="cur"><a href="http://db.auto.sohu.com/pk/trim/157122_157142/compare#">车款对比</a></li>#}
+        {#        <li><a href="http://db.auto.sohu.com/pk-trim.shtml#157122,157142">参数对比</a></li>#}
+        {#        <li><a href="http://db.auto.sohu.com/pk_trimpic.shtml#157122,157142">图片对比</a></li>#}
+    </ul>
+</div>
+<div class="blank"></div>
+<div class="pk-area" style="position: relative; border-bottom: none; top: 0px; width: 100%;">
+    <div class="area">
+        <div class="pk-item" style="width: 46%; float: left">
+            <div class="select-car">
+                <div class="select-box">
+                    <input type="text" id="info1" size="20" maxlength="20" placeholder="请输入房源信息" value=""/>
+                </div>
+                <h3 class="model-name">房源</h3>
+                <h3 class="model-tit" carid="157122">{{ name.info1 }}</h3>
+            </div>
+        </div>
+        <button onclick="pkclick(this)">P K</button>
+        <div class="pk-item" style="width: 47%; float: right">
+            <div class="select-car">
+                <div class="select-box">
+                    <input type="text" id="info2" size="20" maxlength="20" placeholder="请输入房源信息" value=""/>
+                </div>
+                <h3 class="model-name">房源</h3>
+                <h3 class="model-tit" carid="157142">{{ name.info2 }}</h3>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div id="gap" style="height: 175px; display: none;"></div>
+<div class="area" {% if index %}style="display: none"{% endif %}>
+    <div id="focus1" class="focus">
+        {#        <a class="arrow-left" href="javascript:void(0)"></a>#}
+        {#        <a class="arrow-right" href="javascript:void(0)"></a>#}
+        <div class="swiper-container">
+            <ul id="swiper-wrapper1">
+
+                <li class="swiper-slide" style="left: 0px;">
+                    <div class="box">
+                        <div class="photo-list">
+                            <div class="li li-l">
+
+                                <img alt="" src="{{ image_data.info1 }}">
+
+                            </div>
+                            <div class="li li-r">
+
+                                <img alt="" src="{{ image_data.info2 }}">
+
+                            </div>
+                            <img src="{% static 'compare/pk_34bc147.png' %}" class="pk-icon">
+                        </div>
+                        <span class="pk"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="area" {% if index %}style="display: none"{% endif %}>
+    <h3 class="box-tit box-tit1">楼盘基本信息<i></i></h3>
+    <div class="item-box">
+        <table class=" table-box">
+            {% for info in basic_data %}
+                <tr>
+                    <td class="cell">{{ info.info1 }}</td>
+                    <td class="cell">{{ info.title }}</td>
+                    <td class="cell">{{ info.info2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h3 class="box-tit box-tit1">楼盘销售信息<i></i></h3>
+    <div class="item-box">
+        <table class=" table-box">
+            {% for info in sales_data %}
+                <tr>
+                    <td class="cell">{{ info.info1 }}</td>
+                    <td class="cell">{{ info.title }}</td>
+                    <td class="cell">{{ info.info2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h3 class="box-tit box-tit1">楼盘小区规划<i></i></h3>
+    <div class="item-box">
+        <table class=" table-box">
+            {% for info in plan_data %}
+                <tr>
+                    <td class="cell">{{ info.info1 }}</td>
+                    <td class="cell">{{ info.title }}</td>
+                    <td class="cell">{{ info.info2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h3 class="box-tit box-tit1">楼盘周边配套<i></i></h3>
+    <div class="item-box">
+        <table class=" table-box">
+            {% for info in marching_data %}
+                <tr>
+                    <td class="cell" style="text-align: left;">{{ info.info1 }}</td>
+                    <td class="cell">{{ info.title }}</td>
+                    <td class="cell" style="text-align: left;">{{ info.info2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h3 class="box-tit box-tit1">楼盘项目介绍<i></i></h3>
+    <div class="item-box">
+        <table class=" table-box">
+            <tr>
+                <td class="cell" style="text-align: left;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ introduce_data.info1 }}</td>
+                <td class="cell">楼盘项目介绍</td>
+                <td class="cell" style="text-align: left;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ introduce_data.info2 }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+

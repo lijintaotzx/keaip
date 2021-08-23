@@ -1,0 +1,28 @@
+.table-box {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+}
+
+.table-box tr {
+    border-top: 1px solid #fff;
+}
+
+.table-box tr .cell {
+    padding: 10px 20px 10px 20px;
+    font: 16px/40px "Microsoft YaHei";
+    color: #777;
+    text-align: center;
+    width: 460px;
+    border: none;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+}
+
+.table-box tr .cell:nth-child(2){
+    width: 278px;
+    background-color: #fcfcfc;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
