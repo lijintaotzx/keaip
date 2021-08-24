@@ -17,10 +17,14 @@ def merge_detail(d1, d2):
     keys = merge_keys(d1, d2)
     result = []
     for key in keys:
-        result.append({
-            'title': key.replace('&nbsp;', ''),
-            'info1': d1.get(key, '暂无数据'),
-            'info2': d2.get(key, '暂无数据')
-        })
+        key = key.replace('&nbsp;', '')
+        if key == '咨询电话':
+            continue
+        else:
+            result.append({
+                'title': key,
+                'info1': d1.get(key, '暂无数据'),
+                'info2': d2.get(key, '暂无数据')
+            })
 
     return result

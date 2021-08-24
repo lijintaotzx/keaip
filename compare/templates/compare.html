@@ -47,19 +47,6 @@
             font-size: 125%
         }
     </style>
-    <script>
-        function pkclick(self) {
-            var info1 = $("#info1").val();
-            var info2 = $("#info2").val();
-            console.log(info1);
-            console.log(info2)
-            if (info1 == '' || info2 == '') {
-                alert('请输入房源信息！')
-            } else {
-                window.location.href = "/compare/" + "?search1=" + info1 + "&search2=" + info2
-            }
-        }
-    </script>
 </head>
 <body>
 <script type="text/javascript" src="{% static 'compare/jquery-1.8.3.min.js' %}"></script>
@@ -72,7 +59,7 @@
     </ul>
 </div>
 <div class="blank"></div>
-<div class="pk-area" style="position: relative; border-bottom: none; top: 0px; width: 100%;">
+<div class="pk-area" style="position: relative; border-bottom: 1px solid #ccc; top: 0px; width: 100%;">
     <div class="area">
         <div class="pk-item" style="width: 46%; float: left">
             <div class="select-car">
@@ -194,5 +181,31 @@
     </div>
 </div>
 </body>
+    <script>
+        function pkclick(self) {
+            var info1 = $("#info1").val();
+            var info2 = $("#info2").val();
+            console.log(info1);
+            console.log(info2)
+            if (info1 == '' || info2 == '') {
+                alert('请输入房源信息！')
+            } else {
+                window.location.href = "/compare/" + "?search1=" + info1 + "&search2=" + info2
+            }
+        }
+
+        const $area = $('.pk-area');
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                const _top = $(this).scrollTop();
+                if (_top > (50 + 60)) {
+                    $area.css({position: 'fixed'})
+                } else {
+                    $area.css({position: 'relative'})
+                }
+
+            })
+        });
+    </script>
 </html>
 

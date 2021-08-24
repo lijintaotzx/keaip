@@ -128,8 +128,3 @@ class Zhuge:
         detail_url = self.get_detail_url(search_url)
         detail_html = self.get_html(detail_url)
         return self.parse_detail_data(detail_html)
-
-
-if __name__ == '__main__':
-    zhuge = Zhuge()
-    print(zhuge.get_detail("k2十里春风"))
